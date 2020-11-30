@@ -1,0 +1,31 @@
+<div class="table-responsive">
+            <table class="table custom-table mb-0">
+                <thead>
+                    <tr style="border-bottom: 1px solid #e0e0e0;">
+                        <th [ngStyle]="column.style" *ngFor="let column of healthTable.header">{{column.displayName}}</th>
+                    </tr>
+                </thead>
+            </table>
+            <div class="inner_table">
+                <table class="table table-striped custom-table">
+                    <ng-container>
+                        <tr class="table_border_bottom" *ngFor="let item of healthTable.tableData">
+                            <td [ngStyle]="column.style"  *ngFor="let column of healthTable.header">
+                                <div *ngFor="let rowdata of item">
+                                    <span *ngIf="rowdata.key == column.primaryKey && column.outputType == 'text'">{{rowdata.value}}</span>
+                                    <span *ngIf="column.outputType == 'progress-bar'">
+                                        <div *ngFor="let data of rowdata.value">
+                                            <div class="progress">
+                                                <div class="bar" [ngStyle]="{'width': data.value+'%'}">
+                                                    <p class="percent"></p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </span>
+                                </div>
+                            </td>
+                        </tr>
+                    </ng-container>
+                </table>
+            </div>
+        </div>
